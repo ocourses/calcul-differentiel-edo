@@ -61,9 +61,11 @@ Le cours se trouve sur un unique [polycopié](https://github.com/ocourses/calcul
 
 Nous allons utiliser le langage [Julia](https://julialang.org) pour les TPs. Il faut effectuer les étapes suivantes :
 
-1. Installer la dernière version de [Julia](https://julialang.org/downloads/).
+1. Installer [Julia](https://julialang.org/downloads/) en version **1.12.x**.
 
-   N'installez pas Julia via conda.
+   L'environnement du cours (`tp/Manifest.toml`) est figé pour cette version
+   mineure. Une autre version de Julia fonctionne aussi, mais demande une étape
+   supplémentaire (voir le point 5). N'installez pas Julia via conda.
 
 2. Le plus simple est d'utiliser [VSCode](https://code.visualstudio.com/download) pour faire tourner les TPs.
 
@@ -82,12 +84,16 @@ Nous allons utiliser le langage [Julia](https://julialang.org) pour les TPs. Il 
 
 5. Ouvrir le notebook [`tp/install.ipynb`](tp/install.ipynb), puis choisir le noyau Julia installé avec **Select Kernel** en haut à droite. Si plusieurs versions de Julia sont installées, sélectionner celle avec laquelle `IJulia` a été installé. Exécuter ensuite les cellules dans l'ordre.
 
-   Ce notebook crée dans le répertoire `tp/` deux fichiers qui décrivent l'environnement Julia du cours :
+   L'environnement Julia du cours est décrit par deux fichiers déjà présents dans `tp/` :
 
    - `Project.toml` liste les packages utilisés directement par les TPs ;
    - `Manifest.toml` enregistre les versions exactes de ces packages et de leurs dépendances.
 
-   L'installation et la précompilation des packages peuvent prendre plusieurs minutes la première fois. Le notebook affiche ensuite la liste des packages et un message confirmant que l'installation est réussie.
+   Le notebook active cet environnement et installe, avec `Pkg.instantiate()`, les versions enregistrées dans `Manifest.toml`. L'installation et la précompilation peuvent prendre plusieurs minutes la première fois. Le notebook affiche ensuite la liste des packages et un message confirmant que l'installation est réussie.
+
+   Ces fichiers peuvent évoluer lorsqu'un nouveau TP nécessite un package : récupérez alors la mise à jour avec `git pull`, puis réexécutez [`tp/install.ipynb`](tp/install.ipynb).
+
+   Si vous utilisez une version de Julia autre que 1.12 et que `Pkg.instantiate()` signale un problème de version, exécutez une fois `Pkg.resolve()` puis relancez `Pkg.instantiate()` : Julia recalcule alors les versions à partir de `Project.toml`.
 
 6. Ouvrir et exécuter les notebooks de TP. Ils activent normalement automatiquement l'environnement du cours. Si vous travaillez dans une session Julia interactive, activez-le avec :
 
