@@ -70,9 +70,17 @@ Nous allons utiliser le langage [Julia](https://julialang.org) pour les TPs. Il 
    - Installer VSCode.
    - Installer les extensions suivantes dans VSCode : [Julia](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia) et [Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter).
 
-3. Ouvrir le dépôt cloné dans VSCode : **File > Open Folder...**, puis sélectionner le répertoire `calcul-differentiel-edo`.
+3. Installer le paquet `IJulia` depuis un terminal. Il est nécessaire pour démarrer le noyau Julia des notebooks. Utilisez la même version de Julia que celle qui sera sélectionnée dans VSCode :
 
-4. Ouvrir le notebook [`tp/install.ipynb`](tp/install.ipynb). Si nécessaire, choisir un noyau Julia à l'ouverture du notebook, puis exécuter ses cellules dans l'ordre.
+   ```bash
+   julia -e 'using Pkg; Pkg.add("IJulia"); using IJulia; installkernel("Julia")'
+   ```
+
+   Cette commande doit être exécutée dans un terminal, avant de lancer le premier notebook. Elle installe `IJulia` dans l'environnement général de Julia et enregistre le noyau Julia pour Jupyter.
+
+4. Ouvrir le dépôt cloné dans VSCode : **File > Open Folder...**, puis sélectionner le répertoire `calcul-differentiel-edo`.
+
+5. Ouvrir le notebook [`tp/install.ipynb`](tp/install.ipynb), puis choisir le noyau Julia installé avec **Select Kernel** en haut à droite. Si plusieurs versions de Julia sont installées, sélectionner celle avec laquelle `IJulia` a été installé. Exécuter ensuite les cellules dans l'ordre.
 
    Ce notebook crée dans le répertoire `tp/` deux fichiers qui décrivent l'environnement Julia du cours :
 
@@ -81,7 +89,7 @@ Nous allons utiliser le langage [Julia](https://julialang.org) pour les TPs. Il 
 
    L'installation et la précompilation des packages peuvent prendre plusieurs minutes la première fois. Le notebook affiche ensuite la liste des packages et un message confirmant que l'installation est réussie.
 
-5. Ouvrir et exécuter les notebooks de TP. Ils activent normalement automatiquement l'environnement du cours. Si vous travaillez dans une session Julia interactive, activez-le avec :
+6. Ouvrir et exécuter les notebooks de TP. Ils activent normalement automatiquement l'environnement du cours. Si vous travaillez dans une session Julia interactive, activez-le avec :
 
    ```julia
    using Pkg
