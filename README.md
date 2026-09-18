@@ -53,6 +53,14 @@ Pour éviter ce problème, faites toujours une copie personnelle des notebooks a
 - [`tp/`](tp/) contient les notebooks des travaux pratiques. Le notebook [`tp/install.ipynb`](tp/install.ipynb) sert à installer l'environnement Julia commun aux TPs.
 - [`examens/`](examens/) contient d'anciens sujets d'examen pour vous entraîner.
 
+## Exécuter les TPs en ligne avec Binder
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ocourses/calcul-differentiel-edo/HEAD?urlpath=lab)
+
+Sans rien installer, vous pouvez exécuter les notebooks dans le navigateur via [Binder](https://mybinder.org) : cliquez sur le badge ci-dessus, attendez la construction de l'environnement (plusieurs minutes la première fois), puis ouvrez les notebooks du répertoire `tp/`.
+
+Limites : les fichiers ne sont pas sauvegardés entre les sessions (téléchargez vos notebooks modifiés), la session s'arrête après une dizaine de minutes d'inactivité et les ressources sont limitées. Pour un usage régulier, l'installation locale décrite plus bas reste recommandée.
+
 ## Cours
 
 Le cours se trouve sur un unique [polycopié](https://github.com/ocourses/calcul-differentiel-edo/blob/main/cours-cd-edo.pdf). Les exercices de TD sont également regroupés dans ce document.
