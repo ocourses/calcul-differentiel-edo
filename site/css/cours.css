@@ -1,0 +1,273 @@
+/* Ce que le cours ajoute au socle (socle/css/style.css), calculé à la migration
+   par socle/scripts/residu-css.py, moins les relents du simulateur d'automatique
+   (page d'exemple, uPlot, feuilles téléphone) que ce site n'a jamais eus. */
+
+@media (min-width: 901px) and (min-height: 620px) {
+  /* Un complément en deux colonnes (figure, réglages et texte) : sa colonne de
+     texte garde sa hauteur, le bloc ne descend pas en dessous, et c'est la
+     zone qui défile si la fenêtre est trop basse. */
+  body.page-illustration .illustration-zone > .repliable.ouvert:has(.contenu-repliable > .grille-2) {
+    min-height: min-content;
+  }
+
+  body.page-illustration .illustration-zone .contenu-repliable:has(> .grille-2) {
+    flex: 1 1 auto;
+    min-height: min-content;
+  }
+
+  body.page-illustration .illustration-zone .contenu-repliable > .grille-2 {
+    flex: 1 1 auto;
+    grid-auto-rows: auto;
+  }
+
+  body.page-illustration .illustration-zone > .grille-large {
+    flex: 1 1 0;
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  /* Les grilles se partagent leur hauteur en lignes égales ; les cartes, et les
+     blocs qui portent un canevas, deviennent des colonnes dont le canevas
+     occupe la place restante, quelles que soient ses proportions d'origine. */
+  body.page-illustration .illustration-zone .grille-large {
+    grid-auto-rows: minmax(0, 1fr);
+  }
+}
+
+/* Une grande figure à gauche, une colonne de cartes plus étroite à droite. */
+.grille-large {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  align-items: stretch;
+}
+
+.formule {
+  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.formule .katex-display {
+  margin: 0.2em 0;
+}
+
+@media (max-width: 900px) {
+  .grille-large {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Sur une colonne, le texte est large : trois lignes suffisent. */
+  .texte-fixe.six-lignes {
+    min-height: 5.8em;
+  }
+
+  /* La page défile : chaque carte reprend la hauteur de son contenu. */
+  .illustration-zone .colonne-cartes > .carte {
+    flex: none;
+  }
+}
+
+.legende-courbes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em 1.2em;
+  font-family: var(--police-ui);
+  font-size: 0.82rem;
+  color: var(--discret);
+  margin: 0.4em 0 0;
+}
+/* Figure et formule côte à côte (contre-exemple du flot). */
+.figure-et-formule {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  min-width: 0;
+}
+
+.figure-et-formule > canvas.toile {
+  flex: 0 0 auto;
+  width: 45%;
+}
+
+@media (min-width: 901px) and (min-height: 620px) {
+  body.page-illustration .illustration-zone .grille-3 > .figure-et-formule {
+    flex-direction: row;
+  }
+
+  body.page-illustration .illustration-zone .figure-et-formule > canvas.toile.carree {
+    flex: 0 0 auto;
+    align-self: stretch;
+    height: 100%;
+    min-height: 0;
+    width: auto;
+    max-width: 48%;
+  }
+}
+
+/* Repliable « superposé » (contre-exemple) : sur grand écran, l'en-tête reste
+   en bas de la zone et le contenu se déplie au-dessus, par-dessus les figures,
+   sans leur prendre de hauteur. Les figures y sont empilées sur leur formule. */
+@media (min-width: 901px) and (min-height: 620px) {
+  body.page-illustration .illustration-zone > .repliable.superpose,
+  body.page-illustration .illustration-zone > .repliable.superpose.ouvert {
+    flex: 0 0 auto;
+    position: relative;
+    overflow: visible;
+  }
+
+  body.page-illustration .illustration-zone > .repliable.superpose > .contenu-repliable {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    z-index: 20;
+    height: min(520px, 68vh);
+    padding-top: 0.9rem;
+    background: var(--fond-carte);
+    border-radius: var(--rayon-carte) var(--rayon-carte) 0 0;
+    box-shadow: var(--ombre-feuille);
+  }
+
+  body.page-illustration .illustration-zone .superpose .grille-3 > .figure-et-formule {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  body.page-illustration .illustration-zone .superpose .figure-et-formule > canvas.toile {
+    flex: 1 1 0;
+    min-height: 0;
+    width: auto;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* Lecture d'une figure à trois courbes : quatre lignes réservées sur grand écran. */
+.note.lecture-figure {
+  min-height: 6.4em;
+}
+
+/* Même chose dans une colonne étroite : six lignes réservées. */
+.texte-fixe.six-lignes {
+  min-height: 10.4em;
+}
+/* Note qui apparaît avec une formule (KaTeX) : sa hauteur est réservée. */
+.note.conclusion-fixe {
+  min-height: 3em;
+}
+
+/* Colonne de plusieurs cartes dans une grille : elles se partagent sa hauteur. */
+.colonne-cartes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+}
+
+.colonne-cartes > .carte {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+/* Une carte sans canevas garde la hauteur de son texte ; les canevas cèdent. */
+.colonne-cartes > .carte:not(:has(canvas.toile)) {
+  flex: 0 0 auto;
+}
+
+/* Conclusion d'un verdict dont le texte change : une ligne réservée. */
+.conclusion-fixe {
+  min-height: 1.5em;
+}
+
+/* Curseurs sur deux colonnes (beaucoup de paramètres dans une carte). */
+.reglages-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1em;
+}
+
+.reglages-2 .champ {
+  grid-template-columns: 3.2em minmax(0, 1fr) 5.4em 0;
+}
+
+/* Sur téléphone, deux champs côte à côte ne tiennent pas : un par ligne. */
+@media (max-width: 600px) {
+  .reglages-2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Champ imposé par les autres réglages : il reste en place, grisé. */
+.champ.inactif {
+  opacity: 0.45;
+}
+
+/* Tableau de Butcher modifiable : les cᵢ à gauche d'un trait, les bᵢ sous un trait. */
+.butcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.butcher table {
+  border-collapse: collapse;
+}
+
+.butcher td {
+  padding: 2px 4px;
+}
+
+.butcher td.c {
+  min-width: 2.6em;
+  padding-right: 0.6em;
+  border-right: 1px solid var(--texte);
+  color: var(--discret);
+  font-family: var(--police);
+  text-align: right;
+}
+
+.butcher tr.ligne-b td {
+  border-top: 1px solid var(--texte);
+  padding-top: 5px;
+}
+
+.butcher input {
+  width: 3.6em;
+}
+
+/* Conditions d'ordre : vérifiée ou non. */
+table.conditions td.vrai {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+table.conditions td.faux {
+  color: var(--discret);
+}
+
+/* Ligne du tableau qui correspond au réglage choisi. */
+table.valeurs tr.choisie td {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Dans une colonne de cartes étroite, les champs s'empilent : côte à côte, les
+   curseurs seraient écrasés. */
+.colonne-cartes .reglages-2 {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.colonne-cartes .reglages-2 .champ {
+  grid-template-columns: 2.5em minmax(0, 15em) 5.6em 3.5em;
+}
+
+/* Tableau dont une ligne se choisit d'un clic (le compact de l'échappement). */
+.lignes-cliquables tbody tr {
+  cursor: pointer;
+}
+
+.lignes-cliquables tbody tr:hover td {
+  background: var(--zone-stable);
+}

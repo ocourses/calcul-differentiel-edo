@@ -1,0 +1,29 @@
+# Site du cours : tests, puis publication sur GitHub Pages.
+# Workflow du socle ocots-site, épinglé sur le même tag que site/socle.
+# Réglage unique : Settings → Pages → Source : GitHub Actions.
+
+name: Site
+
+on:
+  pull_request:
+    paths:
+      - 'site/**'
+      - '.github/workflows/site.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/site.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  site:
+    uses: ocourses/ocots-site/.github/workflows/site.yml@v0.3.1
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
