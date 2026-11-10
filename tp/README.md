@@ -9,7 +9,9 @@ Les travaux pratiques sont des notebooks [Julia](https://julialang.org).
 - [`runge-kutta.ipynb`](runge-kutta.ipynb) — méthodes de Runge–Kutta pour les
   équations différentielles ordinaires ;
 - [`systemes-dynamiques.ipynb`](systemes-dynamiques.ipynb) — systèmes
-  dynamiques.
+  dynamiques ;
+- [`estimation-parametres.ipynb`](estimation-parametres.ipynb) — estimation de
+  paramètres dans les EDO.
 
 Les prochains TPs seront ajoutés progressivement dans ce répertoire.
 
